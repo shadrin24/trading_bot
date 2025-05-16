@@ -1,0 +1,10 @@
+{
+    "testnet": {
+        "api_key": "YOUR_TESTNET_API_KEY",
+        "api_secret": "YOUR_TESTNET_API_SECRET"
+    },
+    "mainnet": {
+        "api_key": "YOUR_MAINNET_API_KEY",
+        "api_secret": "YOUR_MAINNET_API_SECRET"
+    }
+} 
