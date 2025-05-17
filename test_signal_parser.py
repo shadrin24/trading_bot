@@ -1,13 +1,14 @@
 from core.api_client import BybitClient
-from strategies.signal_parser import SignalParser
+from strategies.signals import WolfixParser, SignalExecutor
 from loguru import logger
 
 def test_signal_parser():
-    # Инициализация клиента и парсера
+    # Инициализация клиента, парсера и исполнителя
     client = BybitClient()
-    parser = SignalParser(client)
+    parser = WolfixParser(client)
+    executor = SignalExecutor(client)
     
-    # Тестовый сигнал
+    # Тестовый сигнал Wolfix
     test_signal = """🔔CRYPTO VIP SIGNAL (https://wolfxsignals.com/plans-lp/)🔔
 
 ETH/USDT 📉 BUY 
@@ -28,12 +29,13 @@ ETH/USDT 📉 BUY
         return
         
     logger.info(f"Распарсенный сигнал: {signal_data}")
+    logger.info(f"Источник сигнала: {signal_data['parser']}")
     
     # Проверка условий входа
-    if parser.check_entry_conditions(signal_data):
+    if executor.check_entry_conditions(signal_data):
         logger.info("Условия входа выполнены")
         # Выполнение сигнала (закомментировано для безопасности)
-        parser.execute_signal(signal_data)  # Размер позиции будет рассчитан автоматически
+        executor.execute_signal(signal_data)  # Размер позиции будет рассчитан автоматически
     else:
         logger.info("Условия входа не выполнены")
 
