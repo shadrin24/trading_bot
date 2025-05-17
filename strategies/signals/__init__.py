@@ -1,3 +1,6 @@
+"""
+Signals package
+"""
 from .base_parser import BaseSignalParser
 from .wolfix_parser import WolfixParser
 from .signal_executor import SignalExecutor
